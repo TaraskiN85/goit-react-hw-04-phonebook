@@ -1,0 +1,41 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 20px 0;
+  width: 70%;
+  border: solid 2px #555;
+  border-radius: 4px;
+  padding: 24px;
+}
+
+.formLabel {
+  font-size: 1.2rem;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.labelTitle {
+  margin-bottom: 8px;
+}
+
+.button {
+  cursor: pointer;
+  width: 40%;
+  min-width: 150px;
+  border: solid 2px #555;
+  border-radius: 3px;
+  }
+
+
+.button:hover,
+.button:active {
+  background-color: #4287f5;
+  color: #fff;
+}
+.labelInput {
+  font-size: 1.2rem;
+}
+

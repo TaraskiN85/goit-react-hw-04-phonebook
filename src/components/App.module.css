@@ -1,0 +1,22 @@
+.phonebook {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  color: #010101;
+  margin-left: 40px;
+  max-width: 600px;
+}
+
+.phonebookTitle {
+  font-size: 1.8rem;
+  align-items: left;
+  font-weight: 700;
+}
+
+.contactsTitle {
+  font-size: 1.6rem;
+  font-weight: 600;
+  padding-bottom: 12px;
+}
