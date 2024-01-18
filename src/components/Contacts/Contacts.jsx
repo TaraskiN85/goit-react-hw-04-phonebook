@@ -5,7 +5,6 @@ export const Contacts = ({contacts, deleteContact}) => {
   
   const handleDeleteContact = (e) => {
     const name = e.currentTarget.name
-    // console.log(name)
     deleteContact(name)
   }
 

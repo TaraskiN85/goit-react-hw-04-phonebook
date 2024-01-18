@@ -1,70 +1,51 @@
-import { Component } from "react";
-import css from './App.module.css';
+import React, { useEffect, useState } from "react";
 
 import { PhonebookForm } from "./Form.jsx/PhonebookForm";
 import {Contacts} from "./Contacts/Contacts";
 import { Filter } from "./Filter/Filter";
 
-export class App extends Component {
+import css from './App.module.css';
 
-  state = {
-    contacts: [],
-    filter: '',
-  }
+export const App = () => {
 
-  componentDidMount() {
-    console.log("Mount:", this.state.contacts)
-    if (localStorage.getItem('phonebook')) {
-      this.setState({contacts: JSON.parse(localStorage.getItem('phonebook'))})
-    }
-  }
+  const [contacts, setContacts] = useState(JSON.parse(localStorage.getItem('phonebook')) || [])
+  const [filter, setFilter] = useState('')
   
-  componentDidUpdate() {
-    localStorage.setItem("phonebook", JSON.stringify(this.state.contacts))
-    console.log("Upd:", this.state.contacts)
-  }
+  useEffect(() => { 
+      localStorage.setItem("phonebook", JSON.stringify(contacts))
+  }, [contacts])
 
-  addUser = (formData => {
-    const isDuplicate = this.state.contacts.some(contact => contact.name === formData.name)
+  const addUser = (formData => {
+    const isDuplicate = contacts.some(contact => contact.name === formData.name)
     
     if (isDuplicate) {
       alert(`${formData.name} is already in contacts.`)
       return
     }
 
-    this.setState((prevState) => {
-      return {
-        contacts: [...prevState.contacts, formData]
-      }
-    })
+    setContacts([...contacts, formData])
   })
 
-  handleSearch = (searchData => {
-    this.setState({filter: searchData})
-  })
+  const handleSearch = (searchData => setFilter(searchData))
 
-  handleDelete = (name) => {
-    this.setState({contacts: this.state.contacts.filter(contact => contact.name !== name)})
+  const handleDelete = (name) => {
+    setContacts(contacts.filter(contact => contact.name !== name))
   }
-  
-  render() {
 
-    const filteredContacts = this.state.contacts.filter(contact => {
-      return contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
-    })
-    
-    return (
-      <div className={css.phonebook}>
-        
-        <h1 className={css.phonebookTitle}>Phonebook</h1>
-        <PhonebookForm addUser={this.addUser} />
-        <h2 className={css.contactsTitle}>Contacts</h2>
-        <Filter
-          value={this.state.filter}
-          handleSearch={this.handleSearch}
-        />
-        <Contacts contacts={filteredContacts} deleteContact={this.handleDelete} />
+  const filteredContacts = contacts.filter(contact => {
+    return contact.name.toLowerCase().includes(filter.toLowerCase())
+  })
+
+  return (
+    <div className={css.phonebook}>
+      <h1 className={css.phonebookTitle}>Phonebook</h1>
+      <PhonebookForm addUser={addUser} />
+      <h2 className={css.contactsTitle}>Contacts</h2>
+      <Filter
+        value={filter}
+        dataSearch={handleSearch}
+      />
+      <Contacts contacts={filteredContacts} deleteContact={handleDelete} />
     </div>
-    );
-  }
-};
+  )
+}

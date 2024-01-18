@@ -11,7 +11,6 @@ export const PhonebookForm = ({addUser}) => {
     const number = e.currentTarget.elements.userNumber.value
 
     const profileData = { name, number, id }
-    console.log(profileData);
     addUser(profileData);
     e.currentTarget.reset()
   }

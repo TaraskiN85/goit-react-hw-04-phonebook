@@ -1,19 +1,17 @@
-import { Component } from 'react'
 import css from './Filter.module.css'
 
-export class Filter extends Component {
+export const Filter = ({ dataSearch }) => {
   
-  handleSearch = (e) => {
+  const handleSearch = (e) => {
     const searchData = e.currentTarget.value
-    this.props.handleSearch(searchData)
+    dataSearch(searchData)
   }
 
-  render() {
-    return (
-      <div>
-        <p className={css.filterLabel}>Find contacts by name</p>
-        <input className={css.filterSearchField} type='search' onChange={this.handleSearch}></input>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <p className={css.filterLabel}>Find contacts by name</p>
+      <input className={css.filterSearchField} type='search'
+        onChange={handleSearch}></input>
+    </div>
+  )
 }
