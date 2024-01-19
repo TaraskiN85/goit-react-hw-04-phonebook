@@ -23,7 +23,7 @@ export const App = () => {
       return
     }
 
-    setContacts([...contacts, formData])
+    setContacts(prevContacts => [...prevContacts, formData])
   })
 
   const handleSearch = (searchData => setFilter(searchData))
